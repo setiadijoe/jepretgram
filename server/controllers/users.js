@@ -25,6 +25,28 @@ const signUp = (req, res) => {
   })
 }
 
+const signIn = (req, res) => {
+  UserModel.findOne({username: req.body.username})
+  .then(user => {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      let token = jwt.sign({
+        id: user._id,
+        name: user.name,
+        username: user.username
+      }, key)
+      console.log('dapat token dong')
+      let jwtToken = {token: token, name: user.name, message: `${user.name} is login`}
+      res.status(200).send(jwtToken)
+    } else {
+      res.status(400).send('Password invalid')
+    }
+  })
+  .catch(err => {
+    res.status(500).send(err)
+  })
+}
+
 module.exports = {
-  signUp
+  signUp,
+  signIn
 }
