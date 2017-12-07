@@ -13,8 +13,9 @@ mongoose.connection.openUri(db, (err) => {
   else console.log('Database connected')
 })
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
+const jepret = require('./routes/jepret');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(cors())
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/jepret', jepret)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

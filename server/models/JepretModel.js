@@ -9,5 +9,5 @@ const jepretSchema = new Schema({
   votes: [{type: Schema.ObjectId, ref: 'Users'}]
 })
 
-const Jepret = mongoose.Schema('Jeprets', jepretSchema)
+const Jepret = mongoose.model('Jeprets', jepretSchema)
 module.exports = Jepret;
